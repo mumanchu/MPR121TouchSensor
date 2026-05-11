@@ -12,7 +12,7 @@ The upper 8 channels (4..11) can be configured as GPIOs if you don't need them a
 
 It has a 400kHz I2C interface, with addresses 0x5A, 0x5B, 0x5C and 0x5D, according to the ADDR pin connection.
 
-Many of the recent MPR121 chips are probably "clones" because NXP stopped manufacturing this chip in 2019, so they are 'not reccomended for new designs'. The chips I am using were about the cheapest on 
+Many of the recent MPR121 chips are probably "clones" because NXP stopped manufacturing this chip in 2019, so they are 'not recommended for new designs'. The chips I am using were about the cheapest on 
 AliExpress, with no 'genuine chip' guarantee, but they all seem to work very well. NXP probably sold the chip design to another company.
 
 Full full details, read the commented source code in `MPR121TouchSensor.h`. A complete example sketch will be added soon.
