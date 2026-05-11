@@ -1,30 +1,32 @@
 ﻿# MPR121 Capacitive Touch Sensor Library, from $${\color{green}mumanchu}$$
 
-*** PRELIMINARY ***
+## *** PRELIMINARY ***
 
 The MPR121 Capacitive Touch Sensor chip provides 12 capacitive touch sensor input channels (0..11), and one 'proximity sensor' channel (12).
 The upper 8 channels (4..11) can be configured as GPIOs if you don't need them as touch sensors.
 
->>> IT IS A 3.3V CHIP! IT CANNOT BE USED WITH 5V MCUs! <<<
-(Well, you could power it with 3.3V and use logic level translators for SCL and SDA so they NEVER see a 5V signal. SDA needs a bi-directional translator.)
+> [!CAUTION]
+> **THIS IS A 3.3V CHIP! IT CANNOT BE USED WITH 5V MCUs! BANG!** (see Disclaimer) \
+> Well, you could power it with 3.3V and use logic level translators for SCL and SDA so they NEVER see a 5V signal. \
+> SDA needs a bi-directional level translator.
 
 It has a 400kHz I2C interface, with addresses 0x5A, 0x5B, 0x5C and 0x5D, according to the ADDR pin connection.
 
 Many of the recent MPR121 chips are probably "clones" because NXP stopped manufacturing this chip in 2019, so they are 'not reccomended for new designs'. The chips I am using were about the cheapest on 
 AliExpress, with no 'genuine chip' guarantee, but they all seem to work very well. NXP probably sold the chip design to another company.
 
+Full full details, read the commented source code in `MPR121TouchSensor.h`. A complete example sketch will be added soon.
+
 ## Avantages of this library
 
-There are a couple other Arduino MPR121 libraries out there. One is too small, and one is too big.
+There are a couple other Arduino MPR121 libraries out there. One is too small, and the other is too big.
 
-This library has these advantages:
-- fully configured GPIO handling (other libraries have none)
-- additional checks (when #ifdef DEBUG) to ensure your clone chip 
-  is working properly
-- dumpRegisters(Stream*) method so you can see what's happening
-- uses shadow registers to optimize read-modify-write
-- uses TwoWire* pointer, so more than one I2C channel can be used on your board
-- uesful comments and easy-to-understand code
+- Fully configured GPIO handling (other libraries have none)
+- Additional checks (when using `#ifdef DEBUG`) to ensure your clone chip is working properly
+- `dumpRegisters(Stream*)` method so you can see what's happening
+- Uses shadow registers to optimize read-modify-write
+- Uses a `TwoWire*` pointer, so more than one I2C channel can be used on your board
+- Has useful comments and easy-to-understand code
 
 ## Stop Mode and Run Mode
 
