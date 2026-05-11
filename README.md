@@ -36,7 +36,7 @@ After calling `begin()`, the chip is in 'stop mode' and it will not register any
 The chip can only be configured when in 'stop mode' because most registers cannot be written unless it's in stop mode. 
 Once configuration is complete, call `setRunMode()` to start the scanning.
 
-## Using the IRQ PIN - Poll It!
+## Using the IRQ Pin - Poll It!
 Instead of using this pin to generate an interrupt, this pin can be connected to an input (INPUT_PULLUP) and polled for touch/release changes. It is set low on a touch/release change, and set high when
 the Touch Status registers (0x00..0x01) are read.
 
