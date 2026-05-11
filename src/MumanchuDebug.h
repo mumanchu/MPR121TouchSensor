@@ -29,7 +29,7 @@ extern void LogError(const char* msg, const char* filePath, uint line);
 
 #ifdef DEBUG
 // if using a debugger, disable all GCC compiler optimisations
-#pragma GCC optimize ("-O0")
+//#pragma GCC optimize ("-O0")
 
 // Shared error logging function
 void LogError(const char* msg, const char* filePath, uint line)
