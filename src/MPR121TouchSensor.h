@@ -20,7 +20,7 @@ It has a 400kHz I2C interface, with addresses 0x5A, 0x5B, 0x5C and
 0x5D, according to the ADDR pin connection.
 
 Many of the recent MPR121 chips are probably "clones" because NXP 
-stopped manufacturing this chip in 2019, so they are 'not reccomended
+stopped manufacturing this chip in 2019, so they are 'not recommended
 for new designs'. The chips I am using were about the cheapest on 
 AliExpress, with no 'genuine chip' guarantee, but they all seem to 
 work very well. NXP probably sold the chip design to another company.
@@ -28,13 +28,13 @@ work very well. NXP probably sold the chip design to another company.
 ADVANTAGES OF THIS LIBRARY
 There are several other Arduino MPR121 libraries out there. 
 This one has these advantages:
-- fully configured GPIO handling (other libraries have none)
-- additional checks (when #ifdef DEBUG) to ensure your clone chip 
+- Fully configured GPIO handling (other libraries have none)
+- Additional checks (when #ifdef DEBUG) to ensure your clone chip 
   is working properly
 - dumpRegisters(Stream*) method so you can see what's happening
-- uses shadow registers to optimize read-modify-write
-- uses TwoWire* pointer, so more than one I2C channel can be used
-- uesful comments and easy-to-understand code
+- Uses shadow registers to optimize read-modify-write
+- Uses TwoWire* pointer, so more than one I2C channel can be used
+- Has useful comments and easy-to-understand code
 
 STOP MODE AND RUN MODE
 'Stop mode' is when the chip is not looking at the sensors.
@@ -61,7 +61,6 @@ flag from loop(). But that is the same polling the IRQ pin.
 
 DATA SHEET
 All 'pxx' page numbers relate to this data sheet
-
 https://www.nxp.com/docs/en/data-sheet/MPR121.pdf
 
 APPLICATION NOTES
@@ -300,13 +299,11 @@ bool MPR121TouchSensor::configureChannels(byte numberOfTouchChannels)
 		// eeee  electrode enable
 		0x5e, 0b10000000,	// baseline tracking enabled, 5 bits used
 
-
 		// NOTES
 		// Registers 0x5f..0x72 are set up by auto configuration, 
 		//   see enableAutoConfiguration()
 		// GPIO registers 0x73..0x7a are set up by setFirstGpio() 
 		//   and setGpioMode()
-		// 
 	};
 
 	for (int i = 0; i < sizeof(configSettings); i += 2) {
@@ -391,7 +388,7 @@ bool MPR121TouchSensor::disableAutoConfiguration()
 // Set the touch and release thresholds for all the channels, p13 
 // threshold : 0..255 (0x00..0xff), typically in the range 0x04..0x10
 // The thresholds provide hysteresis and prevent noise and jitter.
-// The touch threshold should be higher than the release threshold.
+// The touch threshold must be higher than the release threshold.
 // See application note AN3892 for details.
 bool MPR121TouchSensor::setThresholds(byte touchThreshold, byte releaseThreshold)
 {
@@ -416,11 +413,8 @@ bool MPR121TouchSensor::setDebounceCounts(byte releaseCount, byte touchCount)
 	return writeRegister(0x5b, (releaseCount << 4) + touchCount);
 }
 
-
-// configure ELEPROX regs?
-
-// Enable/disable Proximity Sensing
-// Enables 'channel 12' sensor using ELEPROX_EN bits in the ECR register, p16
+// Enable/disable Proximity Sensing, p16
+// Enables 'channel 12' sensor using ELEPROX_EN bits in the ECR register
 // All enabled electrodes are summed to create a single large electrode,
 // which covers a larger sensing area.
 // See application note AN3893.
@@ -731,8 +725,9 @@ bool MPR121TouchSensor::writeRegister(byte reg, byte data)
 	}
 
 	#ifdef DEBUG
-	// read back and verify, unless it's the soft reset register
-	if (reg != 0x80) {
+	// read back and verify, 
+	// unless it's the soft reset or gpio register
+	if (reg != 0x80 && (reg < 0x78 || reg > 0x7a)) {
 		byte b;
 		if (!readRegister(reg, &b))
 			return false;
