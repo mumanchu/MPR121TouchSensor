@@ -8,7 +8,7 @@ The upper 8 channels (4..11) can be configured as GPIOs if you don't need them a
 > [!CAUTION]
 > **THIS IS A 3.3V CHIP! IT CANNOT BE USED WITH 5V MCUs! BANG!** (see Disclaimer) \
 > Well, you could power it with 3.3V and use logic level translators for SCL and SDA so they NEVER see a 5V signal. \
-> SDA needs a bi-directional level translator.
+> SDA needs a fast bi-directional level translator.
 
 It has a 400kHz I2C interface, with addresses 0x5A, 0x5B, 0x5C and 0x5D, according to the ADDR pin connection.
 
@@ -38,13 +38,11 @@ Once configuration is complete, call `setRunMode()` to start the scanning.
 
 ## Using the IRQ Pin - Poll It!
 Instead of using this pin to generate an interrupt, this pin can be connected to an input (INPUT_PULLUP) and polled for touch/release changes. It is set low on a touch/release change, and set high when
-the Touch Status registers (0x00..0x01) are read.
+the Touch Status registers (0x00..0x01) are read. Pass the IRQ pin number to `begin()`, and call `sensorTouched()` to poll it. 
 
-Pass the IRQ pin number to begin(), and call sensorTouched() to poll it. 
-
-Why not use an interrupt?
-The problem is that you can't read the sensor state in an interrupt handler because I2C methods can't be called from interrupt handlers. Instead, you must just set a 'touchStateChanged' flag, and poll that 
-flag from loop(). But that is the same polling the IRQ pin. 
+Why not use an interrupt? \
+The problem is that you can't read the sensor state in an interrupt handler because I2C methods can't be called from interrupt handlers. Instead, the interrupt handler must set a 'touchStateChanged' flag, and poll that 
+flag from `loop()`. But that is the same polling the IRQ pin as in input. 
 
 ## Data Sheet
 
@@ -76,5 +74,7 @@ https://www.nxp.com/docs/en/application-note/AN3894.pdf
 
 # Joke of the Week
 
-Resistance is useless! You must use a capacitor.
+Resistance is useless!
+
+You must use a capacitor.
 
