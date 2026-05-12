@@ -141,7 +141,7 @@ The chip is very versatile and fully programmable with 128 internal registers! T
 
 ## Using the IRQ Pin - Poll It!
 Instead of using the IRQ pin to generate an interrupt, this pin can be connected to an input (INPUT_PULLUP) and polled for touch/release changes. It is set low on a touch/release change, and set high when
-the Touch Status registers (0x00..0x01) are read. Pass the IRQ pin number to `begin()`, and call `sensorTouched()` to poll it. \
+the Touch Status registers (0x00..0x01) are read. Pass the IRQ pin number to `begin()`, and call `sensorTouched()` to poll it.
 
 Why not use an interrupt? \
 The problem is that you can't read the sensor state in an interrupt handler because I2C methods can't be called from interrupt handlers. Instead, the interrupt handler must set a 'touchStateChanged' flag, and poll that 
