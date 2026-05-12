@@ -15,7 +15,8 @@ It has a 400kHz I2C interface, with addresses 0x5A, 0x5B, 0x5C and 0x5D, accordi
 Many of the recent MPR121 chips are probably "clones" because NXP stopped manufacturing this chip in 2019, so they are 'not recommended for new designs'. The chips I am using were about the cheapest on 
 AliExpress, with no 'genuine chip' guarantee, but they all seem to work very well. NXP probably sold the chip design to another company.
 
-Full full details, read the commented source code in `MPR121TouchSensor.h`. A complete example sketch will be added soon.
+Full full details, read the commented source code in `MPR121TouchSensor.h`. \
+A complete example sketch will be added soon.
 
 ## Avantages of this library
 
@@ -31,24 +32,29 @@ There are a couple other Arduino MPR121 libraries out there. One is too small, a
 ## Installation and Use
 
 Download the ZIP file from github via the green "\< \> Code" button. \
-Unzip it and put the `MPR121TouchSensor.h` and `MumanchuDebug.h` files into your Sketch source directory. \
+Unzip it and put the `MPR121TouchSensor.h` and `MumanchuDebug.h` files into your Sketch source directory.
+
 Add this code to the start of your Sketch:
-```
+```cpp
 #include "MumanchuDebug.h"
 //TODO copy/paste the code here which is indicated in MumanchuDebug.h
 ...
 #include "MPR121TouchSensor.h"
 MPR121TouchSensor touchSensor;		// this is the touch sensor object
 ```
-The `MumanchuDebug.h` file defines the `ASSERT()` and `LOGERROR()` macros which are used when `#define DEBUG` is used to generate additional code during development and testing. \
-Copy/paste the indicated code from `MumanchuDebug.h` at the start of your Sketch, so the LogError() function is available (in one place). \
-Alternatively you can just define empty macros like this, if you don't need them: \
-```
+The `MumanchuDebug.h` file defines the `ASSERT()` and `LOGERROR()` macros which are used when `#define DEBUG` is used to generate additional code during development and testing, and to enable the `LOGERROR()` output. \
+Copy/paste the indicated code from `MumanchuDebug.h` at the start of your Sketch, so the `LogError()` function is available (in one place).
+
+You can find more details of the debug and logging features in this repository: \
+https://github.com/mumanchu/MultiTimerSAMD#debugging-features 
+
+Alternatively you can just define empty macros like this, if you don't need them:
+```cpp
 #define ASSERT(b)
 #define LOGERROR(s)
 ```
-Create your MPR121 object and call the code to initialize the sensor. Here's an example... \
-```
+Create your MPR121 object and call the code to initialize the sensor. Here's an example...
+```cpp
 void setup()
 {
 	...
@@ -103,7 +109,7 @@ void setup()
 }
 ```
 Now you can poll the touch sensors and check the inputs, in `loop()`:
-```
+```cpp
 void loop()
 {
 	// has a touch sensor been touched?
@@ -133,7 +139,7 @@ The chip is very versatile and fully programmable with 128 internal registers! T
 > For full details, read the descriptions of each method in the code. These also contain data sheet page references, `p16` etc.
 
 ## Using the IRQ Pin - Poll It!
-Instead of using this pin to generate an interrupt, this pin can be connected to an input (INPUT_PULLUP) and polled for touch/release changes. It is set low on a touch/release change, and set high when
+Instead of using the IRQ pin to generate an interrupt, this pin can be connected to an input (INPUT_PULLUP) and polled for touch/release changes. It is set low on a touch/release change, and set high when
 the Touch Status registers (0x00..0x01) are read. Pass the IRQ pin number to `begin()`, and call `sensorTouched()` to poll it. \
 
 Why not use an interrupt? \
