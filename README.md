@@ -3,7 +3,8 @@
 ## *** PRELIMINARY ***
 
 The MPR121 Capacitive Touch Sensor chip provides 12 capacitive touch sensor input channels (0..11), and one 'proximity sensor' channel (12).
-The upper 8 channels (4..11) can be configured as GPIOs if you don't need them as touch sensors.
+The upper 8 channels (4..11) can be configured as GPIOs if you don't need them as touch sensors. 
+The 'proximity sensor' is a simulated sensor based on data from all the active touch sensor channels.
 
 > [!CAUTION]
 > **THIS IS A 3.3V CHIP! IT CANNOT BE USED WITH 5V MCUs! BANG!** (see Disclaimer) \
@@ -12,8 +13,8 @@ The upper 8 channels (4..11) can be configured as GPIOs if you don't need them a
 
 It has a 400kHz I2C interface, with addresses 0x5A, 0x5B, 0x5C and 0x5D, according to the ADDR pin connection.
 
-Many of the recent MPR121 chips are probably "clones" because NXP stopped manufacturing this chip in 2019, so they are 'not recommended for new designs'. The chips I am using were about the cheapest on 
-AliExpress, with no 'genuine chip' guarantee, but they all seem to work very well. NXP probably sold the chip design to another company.
+Many of the recent MPR121 chips are probably clones because NXP stopped manufacturing this chip in 2019, so they are 'not recommended for new designs'. The chips I am using were about the cheapest on 
+AliExpress, with no 'genuine chip' guarantee, but they all seem to work very well. NXP probably licensed the chip design to another company.
 
 Full full details, read the commented source code in `MPR121TouchSensor.h`. \
 A complete example sketch will be added soon.
