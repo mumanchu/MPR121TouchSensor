@@ -19,6 +19,9 @@ AliExpress, with no 'genuine chip' guarantee, but they all seem to work very wel
 Full full details, read the commented source code in `MPR121TouchSensor.h`. \
 A complete example sketch will be added soon.
 
+> [!TIP]
+> ESP32 chips _already_ have Capacitive Touch Sensor features built in to many of the GPIOs, so you don't need an MPR121. See `touchRead()` and associated functions in the `esp32-hal-touch.h/.c` files.
+
 ## Avantages of this library
 
 There are a couple other Arduino MPR121 libraries out there. One is too small, and the other is too big.
