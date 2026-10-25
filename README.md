@@ -1,4 +1,4 @@
-﻿# MPR121 Capacitive Touch Sensor Library, from $${\color{green}mumanchu}$$
+﻿# MPR121 Capacitive Touch Sensor Library (I2C)
 
 ## *** PRELIMINARY ***
 
@@ -24,13 +24,13 @@ A complete example sketch will be added soon.
 
 ## Avantages of this library
 
-There are a couple other Arduino MPR121 libraries out there. One is too small, and the other is too big.
+There are a couple of other Arduino MPR121 libraries out there. One is too small, the other is too big.
 
 - Fully configured GPIO handling (other libraries have none)
 - Additional checks (when using `#ifdef DEBUG`) to ensure your clone chip is working properly
 - `dumpRegisters(Stream*)` method so you can see what's happening
 - Uses shadow registers to optimize read-modify-write
-- Uses a `TwoWire*` pointer, so more than one I2C channel can be used on your board
+- Uses a `TwoWire*` pointer, so I2C can be shared by other devices, and more than one I2C channel can be used
 - Has useful comments and easy-to-understand code
 
 ## Installation and Use
