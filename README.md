@@ -148,7 +148,7 @@ the Touch Status registers (0x00..0x01) are read. Pass the IRQ pin number to `be
 
 Why not use an interrupt? \
 The problem is that you can't read the sensor state in an interrupt handler because I2C methods can't be called from interrupt handlers. Instead, the interrupt handler must set a 'touchStateChanged' flag, and poll that 
-flag from `loop()`. But that is the same polling the IRQ pin as in input. 
+flag from `loop()`. But that is the same polling the IRQ pin as an input. 
 
 ## Stop Mode and Run Mode
 
